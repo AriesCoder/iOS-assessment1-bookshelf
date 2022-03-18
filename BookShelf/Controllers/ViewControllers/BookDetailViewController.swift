@@ -6,14 +6,9 @@
 //
 
 import UIKit
-class BookCell: UITableViewCell{
-    @IBOutlet weak var titleCellLabel: UILabel!
-    @IBOutlet weak var authorCellLabel: UILabel!
-    
-}
+import Foundation
 
-
-class BookDetailViewController: UIViewController {
+class BookDetailViewController: UIViewController{
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var authorNameLabel: UILabel!
@@ -22,11 +17,10 @@ class BookDetailViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UITextView!
     
     var book: Book?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         updateViews()
-        // Do any additional setup after loading the view.
     }
     
     func updateViews(){
@@ -34,8 +28,18 @@ class BookDetailViewController: UIViewController {
         titleLabel.text = book.title
         authorNameLabel.text = book.author
         imageLabel.image = UIImage(named: book.image)
-        releaseDayLabel.text = book.releaseDate
         descriptionLabel.text = book.description
+        descriptionLabel.layer.cornerRadius = 15.0
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMddYYYY"
+        guard let inputDate = dateFormatter.date(from: book.releaseDate) else {return}
+
+        let newDateFormatter = DateFormatter()
+        newDateFormatter.dateFormat = "MM-dd-YYYY"
+        let date = newDateFormatter.string(from: inputDate)
+        releaseDayLabel.text = date
     }
+    
 }
 

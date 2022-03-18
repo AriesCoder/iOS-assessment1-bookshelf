@@ -7,6 +7,11 @@
 
 import UIKit
 
+//class BookCell: UITableViewCell{
+//    @IBOutlet weak var titleCellLabel: UILabel!
+//    @IBOutlet weak var authorCellLabel: UILabel!
+//
+//}
 
 class BookListTableViewController: UITableViewController {
 
@@ -22,11 +27,11 @@ class BookListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "bookCell", for: indexPath) as! BookCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "bookCell", for: indexPath)
             
             let book = BookController.books[indexPath.row]
-            cell.titleCellLabel.text = book.title
-            cell.authorCellLabel.text = book.author
+            cell.textLabel?.text = book.title
+            cell.detailTextLabel?.text = book.author
            
             return cell
         }
@@ -39,7 +44,7 @@ class BookListTableViewController: UITableViewController {
             guard let indexPath = tableView.indexPathForSelectedRow,
                   let destination = segue.destination as? BookDetailViewController
             else{return}
-            
+
             let bookToSend = BookController.books[indexPath.row]
             destination.book = bookToSend
         }
