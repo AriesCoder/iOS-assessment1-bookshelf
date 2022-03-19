@@ -32,10 +32,17 @@ class BookListTableViewController: UITableViewController {
             let book = BookController.books[indexPath.row]
             cell.textLabel?.text = book.title
             cell.detailTextLabel?.text = book.author
-           
+            cell.layer.cornerRadius = 15.0
+        print("index", indexPath.row)
+            if indexPath.row % 2 == 0 {
+                cell.backgroundColor = .red
+            }
             return cell
         }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
 
     // MARK: - Navigation
 

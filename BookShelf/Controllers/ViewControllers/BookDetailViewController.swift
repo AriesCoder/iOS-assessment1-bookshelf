@@ -31,10 +31,12 @@ class BookDetailViewController: UIViewController{
         descriptionLabel.text = book.description
         descriptionLabel.layer.cornerRadius = 15.0
         
+        //change "date" string to date format
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMddYYYY"
         guard let inputDate = dateFormatter.date(from: book.releaseDate) else {return}
-
+        
+        //format date to the way we want
         let newDateFormatter = DateFormatter()
         newDateFormatter.dateFormat = "MM-dd-YYYY"
         let date = newDateFormatter.string(from: inputDate)
